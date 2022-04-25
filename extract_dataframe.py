@@ -30,23 +30,38 @@ class TweetDfExtractor:
     dataframe
     """
     def __init__(self, tweets_list):
-        
         self.tweets_list = tweets_list
 
     # an example function
     def find_statuses_count(self)->list:
-        statuses_count 
+        statuses_count = [x['user']['statuses_count'] for x in self.tweets_list]
+
+        return statuses_count
         
     def find_full_text(self)->list:
-        text = 
+        text = []
+        for tweet in self.tweets_list:
+            if 'retweeted_status' in tweet.keys() and 'extended_tweet' in                               tweet['retweeted_status'].keys():
+                text.append(tweet['retweeted_status']['extended_tweet']['full_text'])
+            else:
+                text.append('Empty')
+
+        return text 
        
     
     def find_sentiments(self, text)->list:
         
-        return polarity, self.subjectivity
+        polarity, subjectivity = [], []
+        for tweet in text:
+            blob = TextBlob(tweet)
+            sentiment = blob.sentiment
+            polarity.append(sentiment.polarity)
+            subjectivity.append(sentiment.subjectivity)
+
+        return polarity, subjectivity
 
     def find_created_time(self)->list:
-       
+        created_at = [x['created_at'] for x in self.tweets_list]
         return created_at
 
     def find_source(self)->list:
