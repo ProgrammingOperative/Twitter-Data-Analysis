@@ -51,7 +51,6 @@ class Clean_Tweets:
         """
         remove non english tweets from lang
         """
-        
-        df = ----
-        
-        return df
+        self.df = self.df.query("lang == 'en' ")
+
+        return self.df
