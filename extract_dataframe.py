@@ -83,7 +83,7 @@ class TweetDfExtractor:
     
     def find_followers_count(self)->list:
         followers_count = [x['user']['followers_count'] for x in self.tweets_list]
-        return folloers_count
+        return followers_count
 
     
     def find_friends_count(self)->list:
