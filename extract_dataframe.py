@@ -42,16 +42,15 @@ class TweetDfExtractor:
         return statuses_count
       
         
-    def find_full_text(self)->list:
-        
-        text = []
-        print("yes")
-        for tweet in self.tweets_list:
-            if 'retweeted_status' in tweet.keys():
-                text.append(tweet['retweeted_status']['text'])
-            else:
-                text.append('Empty')
-        return text 
+#     def find_full_text(self)->list:
+#         text = []
+#         print("yes")
+#         for tweet in self.tweets_list:
+#             if 'retweeted_status' in tweet.keys():
+#                 text.append(tweet['retweeted_status']['text'])
+#             else:
+#                 text.append('Empty')
+#         return text 
        
     
     def find_sentiments(self, text)->list:
@@ -180,18 +179,18 @@ class TweetDfExtractor:
         return df
     
     
-    def find_full_text(self) -> list:
-        try:
-            retweeted_status = [x.get("retweeted_status", {}) for x in self.tweets_list]
-            text = [(x.get("extended_tweet", {})).get("full_text", None) for x in retweeted_status]
-            filtered = []
-            for x in text:
-                if x != None:
-                    filtered.append(x)
-                    text = ''.join(filtered)
-        except KeyError:
-            text = ''
-        return text
+#     def find_full_text(self) -> list:
+#         try:
+#             retweeted_status = [x.get("retweeted_status", {}) for x in self.tweets_list]
+#             text = [(x.get("extended_tweet", {})).get("full_text", None) for x in retweeted_status]
+#             filtered = []
+#             for x in text:
+#                 if x != None:
+#                     filtered.append(x)
+#                     text = ''.join(filtered)
+#         except KeyError:
+#             text = ''
+#         return text
 
                 
 if __name__ == "__main__":
