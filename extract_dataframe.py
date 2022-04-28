@@ -41,6 +41,12 @@ class TweetDfExtractor:
 
         return statuses_count
       
+    
+    def find_lang(self) -> list:
+        lang = [x['lang'] for x in self.tweets_list]
+
+        return lang
+        
         
     def find_full_text(self)->list:
         text = []
