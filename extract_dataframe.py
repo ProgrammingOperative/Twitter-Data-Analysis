@@ -13,7 +13,7 @@ def read_json(json_file: str)->list:
     
     Returns
     -------
-    length of the json file and a list of json
+   list of json
     """
     
     tweets_data = []
@@ -21,7 +21,7 @@ def read_json(json_file: str)->list:
         tweets_data.append(json.loads(tweets))
     
     
-    return len(tweets_data), tweets_data
+    return tweets_data
 
 
 class TweetDfExtractor:
@@ -42,15 +42,21 @@ class TweetDfExtractor:
 
         return statuses_count
       
+    
+    def find_lang(self) -> list:
+        lang = [x['lang'] for x in self.tweets_list]
+
+        return lang
+        
         
     def find_full_text(self)->list:
         text = []
+        print("yes")
         for tweet in self.tweets_list:
-            if 'retweeted_status' in tweet.keys() and 'extended_tweet' in                               tweet['retweeted_status'].keys():
-                text.append(tweet['retweeted_status']['extended_tweet']['full_text'])
+            if 'retweeted_status' in tweet.keys():
+                text.append(tweet['retweeted_status']['text'])
             else:
-                text.append('Empty')
-
+                text.append(tweet['text'])
         return text 
        
     
@@ -178,6 +184,20 @@ class TweetDfExtractor:
             print('File Successfully Saved.!!!')
         
         return df
+    
+    
+#     def find_full_text(self) -> list:
+#         try:
+#             retweeted_status = [x.get("retweeted_status", {}) for x in self.tweets_list]
+#             text = [(x.get("extended_tweet", {})).get("full_text", None) for x in retweeted_status]
+#             filtered = []
+#             for x in text:
+#                 if x != None:
+#                     filtered.append(x)
+#                     text = ''.join(filtered)
+#         except KeyError:
+#             text = ''
+#         return text
 
                 
 if __name__ == "__main__":
